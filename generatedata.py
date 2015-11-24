@@ -1,5 +1,6 @@
 import datetime
 import random
+import os
 
 hotels = ["Hotel Apple", "Hotel Banana", "Hotel Grapefruit", "Hotel Orange", "Hotel Pineapple"]
 dealTypes = ["rebtate", "rebate_3plus", "pct"]
@@ -11,6 +12,12 @@ def randomDate(startDate, endDate):
     rand = random.random()
     return datetime.timedelta(seconds = rand * datedelta) + startDate
 
+def writeDeals(dealsList):
+    f = open(os.getcwd() + "/data/deals.txt", 'w')
+    for line in dealsList:
+        f.write(line + "\n")
+    f.close()
+
 def generatePercentDeal():
     return "percent deal"
 
@@ -21,16 +28,13 @@ def generateRebatePlusDeal():
     return "rebate plus deal"
 
 
-def generateDeal():
+def generateDeals(n=1):
     dealList = []
-    deals = [generateRebateDeal, generatePercentDeal, generateRebatePlusDeal]
-    dealList.append(random.choice(deals)())
+    for x in range(n):
+        deals = [generateRebateDeal, generatePercentDeal, generateRebatePlusDeal]
+        dealList.append(random.choice(deals)())
     return dealList
 
-
-
-
-
-
 if __name__ == "__main__":
-    print generateDeal()
+    dealsList = generateDeals(100)
+    writeDeals(dealsList)
