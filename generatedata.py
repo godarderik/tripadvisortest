@@ -21,13 +21,7 @@ def randomDateRange(duration):
     firstDate = randomDate(day1, day2)
     return [firstDate, firstDate + datetime.timedelta(days = duration) ]
 
-def writeDeals(dealsList):
-    
-    for line in dealsList:
-        f.write(line + "\n")
-    f.close()
-
-
+#generate a deal for a given hotel
 def generateDeal(hotel):
     dealType = random.choice(dealTypes)
     dateRange = randomDateRange(random.randrange(1,15))
@@ -49,6 +43,7 @@ def generateDeal(hotel):
     return hotel + "," + str(price) + "," + dealText + "," + str(amount) + "," + dealType + "," + str(dateRange[0]) + "," +  str(dateRange[1])
 
 
+#generate 2000 random deals for each hotel
 if __name__ == "__main__":
     f = open(os.getcwd() + "/data/deals.txt", 'w')
     for key,dealType in hotelPrices.iteritems():
