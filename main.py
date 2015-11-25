@@ -1,4 +1,5 @@
 import sys
+import datetime
 
 #todo - implement more error checking here
 def parseQuery(line):
@@ -21,15 +22,45 @@ def parseDeal(line):
     dealParams["endDate"] = splitLine[6]
     return dealParams
 
+def applyDiscount(discountType, initialCost, value):
+    if discountType == "rebate" or discountType == "rebate_3plus":
+        return initialCost - value
+    elif discountType == "pct":
+        return int(initialCost * (100 - abs(value))/100.0)
+
+
+def parseDate(date):
+    splitDate = date.split("-")
+    return datetime.date(int(splitDate[0]), int(splitDate[1]), int(splitDate[2]))
+
+def inDateRange(date, startDate, endDate):
+    return date - startDate > datetime.timedelta(seconds = 0) and endDate - date > datetime.timedelta(seconds = 0)
+
 
 def findBestDeal(query):
     searchParams = parseQuery(query)
     bestDeal = {}
+    bestCost = 9999999999
 
     f = open(searchParams["dealFile"])
     for line in f:
         dealParams = parseDeal(line)
-    return searchParams
+        if not (dealParams["hotel"] == searchParams["hotel"]): #if we are not looking at the correct hotel 
+            continue
+        elif not inDateRange(parseDate(searchParams["startDate"]), parseDate(dealParams["startDate"]), parseDate(dealParams["endDate"])): #test date here
+            continue
+        elif dealParams["type"] == "rebate_3plus" and searchParams["duration"] < 3:
+            continue
+        else: 
+            baseCost = int(searchParams["duration"]) * int(dealParams["price"])
+            baseCost = applyDiscount(dealParams["type"], baseCost, int(dealParams["value"]))
+            if baseCost < bestCost:
+                bestCost = baseCost
+                bestDeal = dealParams
+    if bestDeal == {}:
+        return "no deals available"
+    return bestDeal["text"]
+
 
 
 if __name__ == "__main__":

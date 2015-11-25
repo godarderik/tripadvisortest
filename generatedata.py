@@ -31,10 +31,10 @@ def generateDeal(hotel):
     dealText = ""
 
     if dealType == "rebate": 
-        amount = int(random.random() * 10) * 10 + 5
+        amount = int(random.random() * 10) * int(int(price)/10.0)
         dealText = "$" + str(amount) + " off your stay"
     elif dealType == "pct":
-        amount = -1 * (int(random.random() * 10) * 5 + 5)
+        amount = -1 * (int(random.random() * 5) * 5 + 5)
         dealText =  str(abs(amount)) + "% off your stay"
         pass
     elif dealType == "rebate_3plus":
@@ -47,6 +47,6 @@ def generateDeal(hotel):
 if __name__ == "__main__":
     f = open(os.getcwd() + "/data/deals.txt", 'w')
     for key,dealType in hotelPrices.iteritems():
-        for x in range(2000):
+        for x in range(500):
             f.write(generateDeal(key) + "\n")
     f.close()
