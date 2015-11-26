@@ -2,7 +2,7 @@
 
 ## Running the Code
 
-I used Python 2.7.9 and its standard libraries. The data I generated is found in the data folder. The code can be run by calling “python BestHotelDea.pyl” followed by the required parameters. 
+I used Python 2.7.9 and its standard libraries. The data I generated is found in the data folder. The code can be run by calling “python BestHotelDea.py” followed by the required parameters. 
 
 
 ## Assumptions
