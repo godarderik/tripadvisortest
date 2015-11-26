@@ -31,14 +31,14 @@ def generateDeal(hotel):
     dealText = ""
 
     if dealType == "rebate": 
-        amount = int(random.random() * 10) * int(int(price)/10.0 + 10)
+        amount = -1 * int(random.random() * 10) * int(int(price)/10.0 + 10)
         dealText = "$" + str(amount) + " off your stay"
     elif dealType == "pct":
         amount = -1 * (int(random.random() * 5) * 5 + 5)
         dealText =  str(abs(amount)) + "% off your stay"
         pass
     elif dealType == "rebate_3plus":
-        amount = int(random.random() * 10) * 10 + 5
+        amount = -1 * int(random.random() * 10) * 10 + 5
         dealText =  "$" + str(abs(amount)) + " off your stay 3 nights or more"
     return hotel + "," + str(price) + "," + dealText + "," + str(amount) + "," + dealType + "," + str(dateRange[0]) + "," +  str(dateRange[1])
 
