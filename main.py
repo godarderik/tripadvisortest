@@ -34,7 +34,7 @@ def parseDeal(line):
 #apply a given discount to a given initial cost
 def applyDiscount(discountType, initialCost, value):
     if discountType == "rebate" or discountType == "rebate_3plus":
-        return initialCost - value
+        return initialCost + value
     elif discountType == "pct":
         return int(initialCost * (100 - abs(value))/100.0)
 

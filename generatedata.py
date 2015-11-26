@@ -31,7 +31,7 @@ def generateDeal(hotel):
     dealText = ""
 
     if dealType == "rebate": 
-        amount = int(random.random() * 10) * int(int(price)/10.0)
+        amount = int(random.random() * 10) * int(int(price)/10.0 + 10)
         dealText = "$" + str(amount) + " off your stay"
     elif dealType == "pct":
         amount = -1 * (int(random.random() * 5) * 5 + 5)
