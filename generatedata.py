@@ -43,7 +43,7 @@ def generateDeal(hotel):
     return hotel + "," + str(price) + "," + dealText + "," + str(amount) + "," + dealType + "," + str(dateRange[0]) + "," +  str(dateRange[1])
 
 
-#generate 2000 random deals for each hotel
+#generate 500 random deals for each hotel
 if __name__ == "__main__":
     f = open(os.getcwd() + "/data/deals.txt", 'w')
     for key,dealType in hotelPrices.iteritems():
